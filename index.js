@@ -33,11 +33,25 @@ const formattedBootTime = bootTimeDate.toLocaleString('en-GB', options);
 const now = new Date();
 const currentTime = now.toLocaleTimeString();
 
-// Create a string with the boot time and current time in CSV format
-const csvString = `Operating System Boot Time,${formattedBootTime}Current Time,${currentTime}\n`;
+// Calculate the duration since boot time in seconds
+const durationInSeconds = Math.floor((now - bootTime) / 1000);
+
+// Convert the duration to hours, minutes, and seconds
+const hours = Math.floor(durationInSeconds / 3600);
+const minutes = Math.floor((durationInSeconds % 3600) / 60);
+const seconds = durationInSeconds % 60;
+
+// Format the duration as a string
+const durationString = `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+
+// Create a string with the boot time, current time, and duration in CSV format
+const csvString = `Operating System Boot Time,${formattedBootTime}Current Time,${currentTime}Duration since boot time,${durationString}\n`;
 
 // Append the CSV string to the file
 fs.appendFile('boot_time.csv', csvString, (err) => {
   if (err) throw err;
-  console.log('Boot time and current time saved to boot_time.csv');
+  console.log('Boot time, current time, and duration saved to boot_time.csv');
 });
+
+// Log the duration to the console
+console.log(`Duration since boot time: ${durationString}`);
