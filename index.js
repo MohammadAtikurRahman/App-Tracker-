@@ -21,9 +21,7 @@ const options = {
   minute: 'numeric',
   second: 'numeric',
   hour12: true,
-  timeZoneName: 'short',
-  localeMatcher: 'best fit',
-  formatMatcher: 'best fit'
+
 };
 
 // Format the boot time date
@@ -31,7 +29,8 @@ const formattedBootTime = bootTimeDate.toLocaleString('en-GB', options);
 
 // Get the current time and format it
 const now = new Date();
-const currentTime = now.toLocaleTimeString();
+
+const currentTime = now.toLocaleTimeString('en-GB',options);
 
 // Calculate the duration since boot time in seconds
 const durationInSeconds = Math.floor((now - bootTime) / 1000);
@@ -42,10 +41,17 @@ const minutes = Math.floor((durationInSeconds % 3600) / 60);
 const seconds = durationInSeconds % 60;
 
 // Format the duration as a string
-const durationString = `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+
+
+const user_pc = os.userInfo().username;
+
+const durationString = `${hours} hours ${minutes} minutes ${seconds} seconds`;
 
 // Create a string with the boot time, current time, and duration in CSV format
-const csvString = `Operating System Boot Time,${formattedBootTime}Current Time,${currentTime}Duration since boot time,${durationString}\n`;
+
+console.log(formattedBootTime)
+console.log(currentTime)
+const csvString = `Start Day,Start Time,End Time,End Time,Total Hours Used,PC User\n${formattedBootTime},${currentTime},${durationString},${user_pc}\n`;
 
 // Append the CSV string to the file
 fs.appendFile('boot_time.csv', csvString, (err) => {
@@ -54,4 +60,9 @@ fs.appendFile('boot_time.csv', csvString, (err) => {
 });
 
 // Log the duration to the console
+
+
+
+
+console.log("Who used this PC",user_pc);
 console.log(`Duration since boot time: ${durationString}`);
