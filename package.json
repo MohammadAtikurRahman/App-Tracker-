@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chokidar": "^3.5.3",
     "express": "^4.18.2",
     "moment": "^2.29.4",
+    "ps-list": "^8.1.1",
     "request": "^2.88.2"
   }
 }

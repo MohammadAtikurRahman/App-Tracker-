@@ -53,17 +53,26 @@ const durationString = `${hours} hours ${minutes} minutes ${seconds} seconds`;
 
 // Create a string with the boot time, current time, and duration in CSV format
 
-console.log(formattedBootTime);
-console.log(currentTime);
-const csvString = `Start Date,Start Time,End Date,End Time,Total Hours Used,PC User\n${formattedBootTime},${currentTime},${durationString},${user_pc}\n`;
+// console.log(formattedBootTime);
+// console.log(currentTime);
+const csvData = `${formattedBootTime},${currentTime},${durationString},${user_pc}\n`;
+const csvString = fs.existsSync("boot_time.csv") ? csvData : `start_date,start_time,end_date,end_time,total_hours_used,pc_user\n${csvData}`;
 
-// Append the CSV string to the file
 fs.appendFile("boot_time.csv", csvString, (err) => {
   if (err) throw err;
   console.log("Boot time, current time, and duration saved to boot_time.csv");
-});
+})
 
 // Log the duration to the console
 
-console.log("Who used this PC", user_pc);
+// console.log("Who used this PC", user_pc);
 console.log(`Duration since boot time: ${durationString}`);
+
+
+
+
+
+
+
+
+
