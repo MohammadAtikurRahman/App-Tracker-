@@ -24,12 +24,13 @@ exec('ps aux | grep atik | grep vlc', (err, stdout, stderr) => {
   }).join('\n');
 
   // write the CSV data to a file named atik_processes_{date}.csv
-  const filename = `atik_processes_${currentDate}.csv`;
-  fs.writeFile(filename, Object.keys(processes[0]).join(',') + '\n' + csv, (err) => {
+  const filename = `atik_vlc_processes_${currentDate}.csv`;
+  fs.writeFile(filename, Object.keys(processes[0]).join(',') + '\n' + csv + '\n', { flag: 'a' }, (err) => {
     if (err) {
       console.error(`Error writing to file ${filename}: ${err}`);
       return;
     }
     console.log(`Data written to file ${filename}`);
   });
+  
 });
