@@ -69,7 +69,7 @@ const monitorPlayback = async () => {
     } else if (error.response) {
       console.log('Server responded with a non-200 status code:', error.message);
     } else if (error.code === 'ECONNREFUSED') {
-      console.error('VLC player is not running.');
+      console.log(' player is not running.');
 
       if (videoPlaying) {
         const endTime = new Date();
