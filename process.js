@@ -89,7 +89,6 @@ const monitorPlayback = async () => {
         console.log(`Recorded: Start Time - ${startTime.toISOString()}, End Time - ${endTime.toISOString()}, Duration - ${duration} seconds, File Name - ${fileName}, File Location - ${fileLocation || 'Undefined'}`);
       }
 
-      process.exit();
     } else {
       console.error('Error:', error.message);
     }
