@@ -11,17 +11,15 @@ fs.readdir(recentFolderPath, (err, files) => {
     return;
   }
 
-  // Filter out non-video files and extract the file paths
-  const recentVideoFiles = files
-    .filter(file => {
-      const ext = path.extname(file).toLowerCase();
-      return ext === '.mp4' || ext === '.avi' || ext === '.mkv' || ext === '.lnk';
-    })
-    .map(file => path.join(recentFolderPath, file));
+  // Extract the file paths of all files in the Recent folder
+  const recentFiles = files.map(file => path.join(recentFolderPath, file));
 
-  if (recentVideoFiles.length > 0) {
-    console.log(`Most recently accessed video file: ${recentVideoFiles[0]}`);
+  if (recentFiles.length > 0) {
+    console.log(`Recently accessed files:`);
+    recentFiles.forEach(file => {
+      console.log(file);
+    });
   } else {
-    console.log('No recent video files found.');
+    console.log('No recent files found.');
   }
 });
